@@ -6,5 +6,8 @@ target 'app-92Y' do
   use_frameworks!
 
   # Pods for app-92Y
+	pod 'Firebase/Core'
+	pod 'Firebase/Auth'
+	pod 'Firebase/Database'
 
 end
