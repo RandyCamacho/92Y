@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
         field.layer.cornerRadius = 12
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
-        field.placeholder = "Email Address..."
+        field.placeholder = "Military Email Address..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .white
@@ -57,7 +57,7 @@ class LoginViewController: UIViewController {
     private let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Log In", for: .normal)
-        button.backgroundColor = .link
+        button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
@@ -106,13 +106,18 @@ class LoginViewController: UIViewController {
              alertUserLoginError()
             return
         }
-        //Firebase Log In
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: {authResult, error in guard let result = authResult, error == nil else {
+        //Firebase Log In [weak self] prevents retention cycle
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: {[weak self] authResult, error in
+            guard let strongSelf = self else {
+                return
+            }
+            guard let result = authResult, error == nil else {
             print("Error in Logging in")
             return
         }
         let user = result.user
         print("Logged in: \(user.email)")
+            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         })
     }
     

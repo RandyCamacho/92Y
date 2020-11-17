@@ -9,5 +9,5 @@ target 'app-92Y' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
-
+	pod 'DropDown'
 end
