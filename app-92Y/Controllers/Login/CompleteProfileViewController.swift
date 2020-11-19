@@ -155,6 +155,11 @@ class CompleteProfileViewController: UIViewController {
         uicField.resignFirstResponder()
         jobtitleField.resignFirstResponder()
         
+        menu.selectionAction = {index, title in
+           let rank = title
+            print("Rank: \(rank)")
+        }
+        
         guard let uic = uicField.text, let jobtitle = jobtitleField.text, !uic.isEmpty, !jobtitle.isEmpty else {
             alertUserSignUpError()
             return
