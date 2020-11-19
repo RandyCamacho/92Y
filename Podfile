@@ -10,4 +10,5 @@ target 'app-92Y' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
 	pod 'DropDown'
+	pod 'MessageKit'
 end
