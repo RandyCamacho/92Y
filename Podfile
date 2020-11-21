@@ -9,6 +9,11 @@ target 'app-92Y' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
+	pod 'Firebase/Storage'
+
 	pod 'DropDown'
 	pod 'MessageKit'
+	pod 'JGProgressHUD'
+	pod 'RealmSwift'
+	pod 'SDWebImage'
 end

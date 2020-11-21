@@ -86,7 +86,7 @@ class SignUpViewController: UIViewController {
     private let continueButton: UIButton = {
         let button = UIButton()
         button.setTitle("Continue", for: .normal)
-        button.backgroundColor = .systemGreen
+        button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
@@ -127,7 +127,7 @@ class SignUpViewController: UIViewController {
         lastnameField.frame = CGRect(x: 30, y: firstnameField.bottom+10, width: scrollView.width-60, height: 52)
         emailField.frame = CGRect(x: 30, y: lastnameField.bottom+10, width: scrollView.width-60, height: 52)
         passwordField.frame = CGRect(x: 30, y: emailField.bottom+10, width: scrollView.width-60, height: 52)
-        continueButton.frame = CGRect(x: 30, y: passwordField.bottom+10, width: scrollView.width-60, height: 52)
+        continueButton.frame = CGRect(x: 30, y: passwordField.bottom+10, width: scrollView.width-60, height: 35)
 
     }
     

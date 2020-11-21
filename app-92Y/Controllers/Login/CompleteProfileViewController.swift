@@ -8,12 +8,15 @@
 import UIKit
 import  FirebaseAuth
 import DropDown
+import JGProgressHUD
 
 class CompleteProfileViewController: UIViewController {
     var firstname: String = ""
     var lastname: String = ""
     var email: String = ""
     var password: String = ""
+    
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let scrollView: UIScrollView = {
        let scrollView = UIScrollView()
@@ -24,7 +27,10 @@ class CompleteProfileViewController: UIViewController {
     private let menu: DropDown = {
        let menu = DropDown()
         menu.dataSource = [
-        "Private", "Private First Class", "Specialist", "Corporal", "Sergeant", "Staff Sergeant","Sergeant First Class", "Master Sergeant", "First Sergeant", "Sergeant Major", "Command Sergeant Major", "Sergeant Major of the Army"
+        "Private", "Private First Class", "Specialist", "Corporal",
+            "Sergeant", "Staff Sergeant","Sergeant First Class",
+            "Master Sergeant", "First Sergeant", "Sergeant Major",
+            "Command Sergeant Major", "Sergeant Major of the Army"
             
         ]
         return menu
@@ -44,7 +50,7 @@ class CompleteProfileViewController: UIViewController {
     private let rankButton: UIButton = {
         let button = UIButton()
         button.setTitle("Select Rank", for: .normal)
-        button.backgroundColor = .systemGray
+        button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.layer.masksToBounds = true
@@ -88,6 +94,12 @@ class CompleteProfileViewController: UIViewController {
         return label
     }()
     
+    private let rankTitle: UILabel = {
+       let label = UILabel()
+        label.text = ""
+        return label
+    }()
+    
     private let signupButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign Up", for: .normal)
@@ -110,11 +122,14 @@ class CompleteProfileViewController: UIViewController {
         menu.selectionAction = {index, title in
            let rank = title
             print("Rank: \(rank)")
+            self.rankTitle.text = rank
         }
+        
         
         view.addSubview(scrollView)
         scrollView.addSubview(pictureTitle)
         scrollView.addSubview(imageView)
+        scrollView.addSubview(rankTitle)
         scrollView.addSubview(rankButton)
         scrollView.addSubview(uicField)
         scrollView.addSubview(jobtitleField)
@@ -134,6 +149,7 @@ class CompleteProfileViewController: UIViewController {
         print("Change Pic")
         presentPhotoActionSheet()
     }
+    
     @objc private func chooseRank(){
         menu.show()
     }
@@ -142,13 +158,14 @@ class CompleteProfileViewController: UIViewController {
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
         
-        pictureTitle.frame = CGRect(x: scrollView.width/3.2, y: 20, width: scrollView.width-60, height: 52)
+        pictureTitle.frame = CGRect(x: scrollView.width/3.2, y: 20, width: scrollView.width-60, height: 35)
         imageView.frame = CGRect(x: scrollView.width/3, y: pictureTitle.bottom+5, width: scrollView.width/3, height: scrollView.width/3)
         imageView.layer.cornerRadius = imageView.width/2.0
-        rankButton.frame = CGRect(x: 30, y: imageView.bottom+10, width: scrollView.width-60, height: 52)
+        rankTitle.frame = CGRect(x: 30, y: imageView.bottom+10, width: scrollView.width-60, height: 35)
+        rankButton.frame = CGRect(x: 30, y: rankTitle.bottom+10, width: scrollView.width-60, height: 35)
         uicField.frame = CGRect(x: 30, y: rankButton.bottom+10, width: scrollView.width-60, height: 52)
         jobtitleField.frame = CGRect(x: 30, y: uicField.bottom+10, width: scrollView.width-60, height: 52)
-        signupButton.frame = CGRect(x: 30, y: jobtitleField.bottom+10, width: scrollView.width-60, height: 52)
+        signupButton.frame = CGRect(x: 30, y: jobtitleField.bottom+10, width: scrollView.width-60, height: 35)
     }
     
     @objc private func signup() {
@@ -158,17 +175,25 @@ class CompleteProfileViewController: UIViewController {
         menu.selectionAction = {index, title in
            let rank = title
             print("Rank: \(rank)")
+            self.rankTitle.text = rank
         }
         
-        guard let uic = uicField.text, let jobtitle = jobtitleField.text, !uic.isEmpty, !jobtitle.isEmpty else {
+        guard let uic = uicField.text, let jobtitle = jobtitleField.text, !uic.isEmpty, !jobtitle.isEmpty, let rank = menu.selectedItem else {
             alertUserSignUpError()
             return
         }
+        
+        spinner.show(in: view)
         
         DatabaseManager.shared.userEmailExists(with: email, completion: {[weak self]exists in
             guard let strongSelf = self else {
                 return
             }
+            
+            DispatchQueue.main.async {
+                strongSelf.spinner.dismiss()
+            }
+            
             guard !exists else {
                 //user already exists
                 strongSelf.alertUserSignUpError(message: "Email Account Already Exists")
@@ -181,7 +206,26 @@ class CompleteProfileViewController: UIViewController {
                     return
                 }
                 
-                DatabaseManager.shared.insertUser(with: appUser(firstname: strongSelf.firstname, lastname: strongSelf.lastname, emailAddress: strongSelf.email))
+                let chatUser = appUser(firstname: strongSelf.firstname, lastname: strongSelf.lastname, emailAddress: strongSelf.email, rank: rank , uic: uic, jobtitle: jobtitle)
+                DatabaseManager.shared.insertUser(with: chatUser, completion: {success in
+                    if success{
+                        // upload image
+                        guard let image = strongSelf.imageView.image, let data = image.pngData() else {
+                            return
+                        }
+                        
+                        let fileName = chatUser.profilePictureFileName
+                        StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName, completion: {result in
+                            switch result {
+                            case .success(let downloadUrl):
+                                UserDefaults.standard.set(downloadUrl, forKey:"profile_picture_url")
+                                print(downloadUrl)
+                            case .failure(let error):
+                                print("Storage manager error: \(error)")
+                            }
+                        })
+                    }
+                })
                 
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             })

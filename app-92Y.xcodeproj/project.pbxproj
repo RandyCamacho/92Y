@@ -22,6 +22,9 @@
 		1AE30641256644540022B513 /* FormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30640256644540022B513 /* FormsViewController.swift */; };
 		1AE306442566446E0022B513 /* RegulationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE306432566446E0022B513 /* RegulationsViewController.swift */; };
 		1AE30647256644920022B513 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30646256644920022B513 /* RecentsViewController.swift */; };
+		1AFCE13A25674CAC00244D57 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFCE13925674CAC00244D57 /* ChatViewController.swift */; };
+		1AFCE13D256759A700244D57 /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFCE13C256759A700244D57 /* NewChatViewController.swift */; };
+		1AFCE1582567762100244D57 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFCE1572567762100244D57 /* StorageManager.swift */; };
 		FF0E442ED55E7C7C3313DA7F /* Pods_app_92Y.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F3BA8FD5585BBB613B3D80 /* Pods_app_92Y.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +47,9 @@
 		1AE30640256644540022B513 /* FormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsViewController.swift; sourceTree = "<group>"; };
 		1AE306432566446E0022B513 /* RegulationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegulationsViewController.swift; sourceTree = "<group>"; };
 		1AE30646256644920022B513 /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
+		1AFCE13925674CAC00244D57 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		1AFCE13C256759A700244D57 /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
+		1AFCE1572567762100244D57 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		599A24F8935F2AB5568EAADD /* Pods-app-92Y.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app-92Y.release.xcconfig"; path = "Target Support Files/Pods-app-92Y/Pods-app-92Y.release.xcconfig"; sourceTree = "<group>"; };
 		697F06EBB35743B7E8D1A5CE /* Pods-app-92Y.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app-92Y.debug.xcconfig"; path = "Target Support Files/Pods-app-92Y/Pods-app-92Y.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +121,7 @@
 				1ADE51522560CD63003827A5 /* SceneDelegate.swift */,
 				1ADE517C2561037C003827A5 /* Extensions.swift */,
 				1AE306302563ABF50022B513 /* DatabaseManager.swift */,
+				1AFCE1572567762100244D57 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -134,6 +141,8 @@
 				1AE30640256644540022B513 /* FormsViewController.swift */,
 				1AE306432566446E0022B513 /* RegulationsViewController.swift */,
 				1AE30646256644920022B513 /* RecentsViewController.swift */,
+				1AFCE13925674CAC00244D57 /* ChatViewController.swift */,
+				1AFCE13C256759A700244D57 /* NewChatViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -292,6 +301,7 @@
 				1AE306442566446E0022B513 /* RegulationsViewController.swift in Sources */,
 				1AE306312563ABF50022B513 /* DatabaseManager.swift in Sources */,
 				1ADE51742560DB10003827A5 /* LoginViewController.swift in Sources */,
+				1AFCE1582567762100244D57 /* StorageManager.swift in Sources */,
 				1ADE517D2561037C003827A5 /* Extensions.swift in Sources */,
 				1ADE51552560CD63003827A5 /* ProfileViewController.swift in Sources */,
 				1AE30641256644540022B513 /* FormsViewController.swift in Sources */,
@@ -299,7 +309,9 @@
 				1ADE51512560CD63003827A5 /* AppDelegate.swift in Sources */,
 				1AE30647256644920022B513 /* RecentsViewController.swift in Sources */,
 				1ADE51532560CD63003827A5 /* SceneDelegate.swift in Sources */,
+				1AFCE13A25674CAC00244D57 /* ChatViewController.swift in Sources */,
 				1ADE51782560DB80003827A5 /* SignUpViewController.swift in Sources */,
+				1AFCE13D256759A700244D57 /* NewChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
