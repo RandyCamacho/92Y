@@ -39,8 +39,22 @@ class RecentsViewController: UIViewController {
     
     @objc private func newChat(){
         let vc = NewChatViewController()
+        vc.completion = {[weak self]result in
+            self?.createNewChat(result: result)
+        }
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
+    }
+    
+    private func createNewChat(result: [String: String]) {
+        guard let name = result["name"], let email = result["email"] else {
+            return
+        }
+        let vc = ChatViewController(with: email)
+        vc.isNewConversation = true
+        vc.title = name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,15 +80,15 @@ extension RecentsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Hello World"
+        cell.textLabel?.text = "Random User"
         cell.accessoryType = .disclosureIndicator
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = ChatViewController()
-        vc.title = "Chat Title"
+        let vc = ChatViewController(with: "text@email.com")
+        vc.title = "Random User"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
