@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A795DD0256DED0500B99A5D /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A795DCF256DED0500B99A5D /* ConversationTableViewCell.swift */; };
 		1ADE51512560CD63003827A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADE51502560CD63003827A5 /* AppDelegate.swift */; };
 		1ADE51532560CD63003827A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADE51522560CD63003827A5 /* SceneDelegate.swift */; };
 		1ADE51552560CD63003827A5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADE51542560CD63003827A5 /* ProfileViewController.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		18F3BA8FD5585BBB613B3D80 /* Pods_app_92Y.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app_92Y.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A77DDA32563644500B96A12 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1A795DCF256DED0500B99A5D /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		1ADE514D2560CD63003827A5 /* app-92Y.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "app-92Y.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ADE51502560CD63003827A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ADE51522560CD63003827A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				1ADE516B2560D3AE003827A5 /* Storyboards */,
 				1ADE51592560CD65003827A5 /* Assets.xcassets */,
+				1A795DCF256DED0500B99A5D /* ConversationTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				1AFCE13A25674CAC00244D57 /* ChatViewController.swift in Sources */,
 				1ADE51782560DB80003827A5 /* SignUpViewController.swift in Sources */,
 				1AFCE13D256759A700244D57 /* NewChatViewController.swift in Sources */,
+				1A795DD0256DED0500B99A5D /* ConversationTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
