@@ -121,7 +121,8 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
-        if let conversationId = conversationId{
+        
+        if let conversationId = conversationId {
             listenForMessages(id: conversationId, shouldScrollToBottom: true)
         }
     }
@@ -136,19 +137,31 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             return
         }
         print("Sending: \(text)")
+        
+        let message = Message(sender: selfSender, kind: .text(text), messageId: messageId, sentDate: Date())
         //Send Message
         if isNewConversation {
             //create convo
-            let message = Message(sender: selfSender, kind: .text(text), messageId: messageId, sentDate: Date())
-            DatabaseManager.shared.createNewChat(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { success in
+            DatabaseManager.shared.createNewChat(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { [weak self] success in
                 if success {
                     print("message sent")
+                    self?.isNewConversation = false
                 } else {
                     print("message failed")
                 }
             })
         } else {
             //append to convo
+            guard let conversationId = conversationId, let name = self.title else {
+                return
+            }
+            DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: otherUserEmail, name: name, newMessage: message, completion: { success in
+                if success {
+                    print("message sent")
+                } else {
+                    print("message failed to send")
+                }
+            })
         }
     }
     
